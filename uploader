@@ -32,7 +32,7 @@ except NameError:
 #https://cloud.google.com/sdk/gcloud/reference/
 os.chdir(os.path.dirname(sys.argv[0]))
 #Sets the environmental variable to python 2.7, the version accepted by Google Cloud SDK.
-os.environ["CLOUDSDK_PYTHON"] = "python2.7";
+#os.environ["CLOUDSDK_PYTHON"] = "python2.7";
 #install alpha and beta, components needed to create the project.
 gcloudf(["-q", "components", "install", "alpha", "beta"])
 print("A pop up window will open in a few seconds asking you to login.")
