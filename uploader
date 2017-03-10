@@ -17,7 +17,7 @@ def generate_project_id():
 		if project_id_is_valid(project_id):
 			return project_id
 def gcloudf(args):
-	subprocess.check_call(["./google-cloud-sdk/bin/gcloud"] + args)
+	subprocess.check_call([".\\google-cloud-sdk\\bin\\gcloud.cmd"] + args)
 
 #You can change the region to "asia-northeast1", "europe-west" or "us-east1", depending on your location.
 REGION = "us-central"
