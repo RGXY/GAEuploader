@@ -21,6 +21,13 @@ def gcloudf(args):
 def gcloudoutput(args):
 	return subprocess.check_output([".\\google-cloud-sdk\\bin\\gcloud.cmd"] + args)
 
+def removeends(path):
+	if path.endswith("\n"):
+		path = path[:-1]
+	if path.endswith("\r\n"):
+		path = path[:-2]
+	return path
+
 #You can change the region to "asia-northeast1", "europe-west" or "us-east1", depending on your location.
 REGION = "us-central"
 
@@ -36,7 +43,9 @@ os.chdir(os.path.dirname(sys.argv[0]))
 #Sets the environmental variable to python 2.7, the version accepted by Google Cloud SDK.
 #os.environ["CLOUDSDK_PYTHON"] = "python2.7";
 #install alpha and beta, components needed to create the project.
-os.environ["CLOUDSDK_PYTHON"] = gcloudoutput(["components", "copy-bundled-python"])
+path = gcloudoutput(["components", "copy-bundled-python"])
+os.environ["CLOUDSDK_PYTHON"] = removeends(path)
+gcloudf(["components", "list"])
 gcloudf(["-q", "components", "install", "alpha", "beta"])
 print("A pop up window will open in a few seconds asking you to login.")
 print("Please keep this terminal window open, and return to it after\nyou log in and accept the terms of service in the pop-up window.")
