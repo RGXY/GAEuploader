@@ -45,8 +45,8 @@ os.chdir(os.path.dirname(sys.argv[0]))
 #install alpha and beta, components needed to create the project.
 path = gcloudoutput(["components", "copy-bundled-python"])
 os.environ["CLOUDSDK_PYTHON"] = removeends(path)
-gcloudf(["components", "list"])
 gcloudf(["-q", "components", "install", "alpha", "beta"])
+del os.environ["CLOUDSDK_PYTHON"]
 print("A pop up window will open in a few seconds asking you to login.")
 print("Please keep this terminal window open, and return to it after\nyou log in and accept the terms of service in the pop-up window.")
 print("\n\n\n")
