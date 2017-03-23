@@ -44,7 +44,8 @@ os.chdir(os.path.dirname(sys.argv[0]))
 #os.environ["CLOUDSDK_PYTHON"] = "python2.7";
 #install alpha and beta, components needed to create the project.
 path = gcloudoutput(["components", "copy-bundled-python"])
-os.environ["CLOUDSDK_PYTHON"] = removeends(path)
+path = removeends(path)
+os.environ["CLOUDSDK_PYTHON"] = path
 gcloudf(["-q", "components", "install", "alpha", "beta"])
 del os.environ["CLOUDSDK_PYTHON"]
 print("A pop up window will open in a few seconds asking you to login.")
@@ -83,6 +84,11 @@ gcloudf(["beta", "config", "set", "project", appname])
 #create an App Engine app within the current Google Cloud Project.
 gcloudf(["beta", "app", "create", "--region=" + REGION, "--project=" + appname])
 #deploy the meek source code onto the newly created google app engine.
+print("setting my path to:")
+print(repr(path))
+sys.stdout.flush()
+os.environ["CLOUDSDK_PYTHON"] = path
 gcloudf(["-q", "app", "deploy", "./appengine/app.yaml"])
+del os.environ["CLOUDSDK_PYTHON"]
 print("Your bridge line is:\n" + "meek 0.0.2.0:1 url=https://" + appname + ".appspot.com/ front=www.google.com")
 sys.stdout.flush()
