@@ -1,2 +1,4 @@
 *.pyc
 google-cloud-sdk
+remove.cmd
+removecomponents
