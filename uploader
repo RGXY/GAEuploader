@@ -24,6 +24,8 @@ def gcloudoutput(args):
 def removeends(path):
 	if path.endswith("\n"):
 		path = path[:-1]
+	if path.endswith("\r"):
+		path = path[:-1]
 	if path.endswith("\r\n"):
 		path = path[:-2]
 	return path
